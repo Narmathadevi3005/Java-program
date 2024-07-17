@@ -1,0 +1,163 @@
+import java.util.*;
+public class linkedlist{
+    Node head;
+    
+    class Node{
+        int data;
+        Node next;
+        
+        Node(int val){
+            data = val;
+            next = null;
+            
+        }
+    }
+    linkedlist(){
+        head = null;
+    }
+    public void insertend(int val){
+        Node newnode = new Node(val);
+        
+        if (head ==null){
+            head = newnode;
+        }
+        else{
+            Node temp = head;
+            while(temp.next != null){
+                temp= temp.next;
+            }
+            temp.next = newnode;
+        }
+    }
+    public void insertbeg(int val)
+    {
+        Node newnode=new Node(val);
+        if(head==null)
+        {
+            head=newnode;
+        }
+        else
+        {
+            newnode.next=head;
+            head=newnode;
+        }
+    }
+    public void insertposition(int pos,int d)
+    {
+        Node newnode=new Node(d);
+        Node temp=head;
+        for(int i=1;i<pos;i++)
+        {
+            temp=temp.next;
+        }
+        newnode.next=temp.next;
+        temp.next=newnode;
+    }
+    public void deletebeg()
+    {
+        head=head.next;
+    }
+    public void deletepos(int d)
+    {
+        Node temp=head;
+        Node prev=null;
+        for(int i=1;i<d;i++)
+        {
+            prev=temp;
+            temp=temp.next;
+        }
+        prev.next=temp.next;
+    }
+    public void reverse()
+    {
+        Node prev=null;
+        Node current=head;
+        Node next=current.next;
+        while(current!=null)
+        {
+            next=current.next;
+            current.next=prev;
+            prev=current;
+            current=next;
+        }
+        head=prev;
+    }
+    public void search(int k)
+    {
+        Node temp=head;
+        while(temp!=null)
+        {
+            if(k==temp.data)
+            {
+                System.out.println("The search value is found in the list!!!");
+            }
+            else
+            {
+                System.out.println("The search value is not found in the list!!!");
+            }
+        }
+    }
+    public void min()
+    {
+        int b=0;
+        while(b<temp.data)
+        {
+            b=temp.data;
+        }
+        temp=temp.next;
+        System.out.println("The Minimum value in the list is"+b);
+    }
+    public void max()
+    {
+        int b=10;
+        while(b>temp.data)
+        {
+            b=temp.data;
+        }
+        temp=temp.next;
+        System.out.println("The Maximum value in the list is"+b);
+    }
+    public void sort(){
+        Node current , index;
+        int temp ;
+        
+        for(current = head ; current.next != null; current= current.next){
+            for(index = current.next ; index !=null; index = index.next){
+                if(current.data>index.data){
+                    temp = current.data;
+                    current.data = index.data;
+                    index.data = temp;
+                }
+            }
+        }
+        
+        
+    }
+    public void display(){
+        Node temp = head;
+        
+        while(temp != null){
+            System.out.print(temp.data + "-->");
+            temp = temp.next;
+        }
+        System.out.println("Null");
+    }
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        linkedlist list = new linkedlist();
+        System.out.println("Enter the number of values to be entered:");
+        int n = sc.nextInt();
+        System.out.println("Enter the values to be entered at end of list:");
+        for(int i =0;i<n;i++){
+            int val = sc.nextInt();
+            list.insertend(val);
+        }
+        System.out.println("Enter the value to be enter at the position:");
+        int pos=sc.nextInt();
+        int k=sc.nextInt();
+        System.out.println("Enter the value to be enter at the begining");
+        int b=sc.nextInt();
+        list.sort();
+        list.display();
+    }
+}
