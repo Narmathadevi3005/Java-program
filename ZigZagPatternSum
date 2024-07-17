@@ -1,0 +1,82 @@
+ import java.util.Scanner;
+
+public class ZigZagPatternSum {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter the number of rows:");
+        int rows = scanner.nextInt();
+        System.out.println("Enter the number of columns:");
+        int columns = scanner.nextInt();
+
+        int[][] matrix = new int[rows][columns];
+
+        System.out.println("Enter the elements of the matrix:");
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                matrix[i][j] = scanner.nextInt();
+            }
+        }
+
+        Runnable zigZagTask = () -> {
+            int sum = calculateZigZagSum(matrix);
+            System.out.println("The sum of Zig-Zag pattern is " + sum);
+        };
+
+        Thread thread = new Thread(zigZagTask);
+        thread.start();
+
+        scanner.close();
+    }
+
+    private static int calculateZigZagSum(int[][] matrix) {
+        int sum = 0;
+        for (int i = 0; i < matrix.length; i++) {
+            if (i % 2 == 0) {
+                for (int j = 0; j < matrix[i].length; j++) {
+                    sum += matrix[i][j];
+                }
+            } else {
+                for (int j = matrix[i].length - 1; j >= 0; j--) {
+                    sum += matrix[i][j];
+                }
+            }
+        }
+        return sum;
+    }
+}
+[17/07, 4:24 pm] Narmatha: import java.util.*;
+public class Vowel_Check {
+  public static void main(String[] args) {
+    Scanner obj=new Scanner(System.in);
+    try {
+      //String str1= "Who would know naught of art must learn,act,and then take his ease ";
+      String str=obj.nextLine();
+      checkVowels(str);
+      System.out.println("String contains vowels.");
+    } catch (NoVowelsException e) {
+      System.out.println("Error: " + e.getMessage());
+    }
+  }
+
+  public static void checkVowels(String text) throws NoVowelsException {
+    boolean containsVowels = false;
+    String vowels = "aeiouAEIOU";
+
+    for (int i = 0; i < text.length(); i++) {
+      char ch = text.charAt(i);
+      if (vowels.contains(String.valueOf(ch))) {
+        containsVowels = true;
+        break;
+      }
+    }
+    if (!containsVowels) {
+      throw new NoVowelsException("String does not contain any vowels.");
+    }
+  }
+}
+class NoVowelsException extends Exception {
+  public NoVowelsException(String message) {
+    super(message);
+  }
+}
